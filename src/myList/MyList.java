@@ -21,7 +21,7 @@ public class MyList<E> {
     //Step 03. Thêm phần tử vào vị trí index trong mảng
     void add(int index, E element) {
         //Kiểm tra tính hợp lệ của giá trị index truyền vào, thông báo lỗi nếu sai,
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException();
         } else {
             //Mở rộng mảng dữ liệu hiện tại thành mảng mới, nếu cần thiết
