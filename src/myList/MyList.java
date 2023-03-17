@@ -21,6 +21,10 @@ public class MyList<E> {
     //Step 03. Thêm phần tử vào vị trí index trong mảng
     void add(int index, E element) {
         //Kiểm tra tính hợp lệ của giá trị index truyền vào, thông báo lỗi nếu sai,
+        if (index == 0) {
+            add(element);
+            return;
+        }
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException();
         } else {
@@ -31,9 +35,10 @@ public class MyList<E> {
             ensureCapacity();
             Object temp = elements[index];
             elements[index] = element;
-            for (int i = index + 1; i < size + 1; i++) {
+            for (int i = index+1; i < size + 1; i++) {
+                Object tempNext = elements[i];
                 elements[i] = temp;
-                temp = elements[i + 1];
+                temp = tempNext;
             }
             size++;
         }
@@ -48,12 +53,9 @@ public class MyList<E> {
             throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Actual size: " + size);
         } else {
             Object deletedElements = elements[index];
-            for (int i = index; i < size; i++) {
-                Object temp = elements[i];
+            for (int i = index; i < size-1; i++) {
                 elements[i] = elements[i + 1];
-                elements[i + 1] = temp;
             }
-//            elements[size - 1] = null;
             size--;
             return (E) deletedElements;
         }
